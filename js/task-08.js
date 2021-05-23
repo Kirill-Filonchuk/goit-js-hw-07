@@ -14,53 +14,56 @@
 //   <button type="button" data-action="render">Создать</button>
 //   <button type="button" data-action="destroy">Очистить</button>
 // </div>
+const refs={
+    inputPlace: document.querySelector('#boxes'),
+    createBtn:document.querySelector('[data-action="render"]'),
+    inputForm:document.querySelector('[type="number"]'),
+    destroyBtn:document.querySelector('[data-action="destroy"]'),
+};
 
-// <div id="boxes"></div>
-//   const itemsEl= ingredients.map(ing=>{
-//     const item=document.createElement('li');
-//     item.textContent=ing;
-//     return item;
-// });
-// console.log(itemsEl);
+const randomRGB = ()=>Math.ceil(Math.random()*(255-0)+0);
 
-// list.append(...itemsEl);
+const getRgbStyle = ()=>{return `rgb(${randomRGB()},${randomRGB()},${randomRGB()})`};
 
-console.log()
-console.log()
-console.log()
+const baseParamOfBox = 30;
 
-const refs ={
-    manage: document.querySelector('#controls'),
-    input: document.querySelector('[type=number]'),
-    render: document.querySelector('[data-action="render"]'),
-    destroy: document.querySelector('[data-action="destroy"]'),
-    result: document.querySelector('#boxes'),
+const boxSize = (n)=> baseParamOfBox+(n-1)*10;
+
+const boxMarkUp = (n)=>{
+    const color=getRgbStyle();
+    const markUp = `<div style="background-color: ${color}; width: ${boxSize(n)}px; height:${boxSize(n)}px;">${n}</div>`;
+    return markUp;
 }
-console.log(refs.manage, refs.input, refs.render, refs.destroy, refs.result);
 
-refs.input.addEventListener('blur', onTypeValue);
-
-let typeValue=0;
-// let fontSize= `${event.currentTarget.value}px`;
-//     followUpText.style.fontSize=fontSize;
-
-function onTypeValue (event) {
-    typeValue=event.currentTarget.value;
-    console.dir(event.currentTarget.value)
-    const arrayOfElement = [];
-    
-    for (let i=0; i<=event.currentTarget.value; i+=1) {
-        arrayOfElement.push(i);
+const addMyMarckUp = function(n){
+    let baseStyle="";
+    for(let i=1; i<=n; i++) {
+        baseStyle+=boxMarkUp(i)
     }
-console.log(arrayOfElement);
-
-const itemsEl= arrayOfElement.map(el=>{
-        const item=document.createElement('div');
-        item.textContent=el;
-        return item;
-    });
-
-    refs.result.append(...itemsEl);
-return itemsEl;
+    refs.inputPlace.insertAdjacentHTML('afterbegin',baseStyle)
 }
+
+const normolaseInputValue=function(){ 
+    let a= 0;
+    if (refs.inputForm.value<=Number(refs.inputForm.max) && refs.inputForm.value>=Number(refs.inputForm.min)){
+        a=refs.inputForm.value
+        return a;
+    } else {
+        return alert('введите число в диапазоне от 0 до 100')
+    }
+};
+
+refs.destroyBtn.addEventListener('click', onTargetToDestroyBtn)
+function onTargetToDestroyBtn(){
+    refs.inputPlace.innerHTML="";
+    refs.inputForm.value='';
+};
+
+
+refs.createBtn.addEventListener('click', onTargetCreateBtn)
+function onTargetCreateBtn(){
+    refs.inputPlace.innerHTML="";
+    addMyMarckUp(normolaseInputValue());
+}
+
 

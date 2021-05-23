@@ -9,14 +9,16 @@ console.dir(contrByRange);
 const followUpText=document.querySelector('#text');
 console.dir(followUpText);
 
-contrByRange.min=10;
-contrByRange.max=32;
-contrByRange.step=4;
-
-
-// followUpText.style.fontSize=`${contrByRange.value}px`
-contrByRange.value=16;
+followUpText.style.fontSize=`${contrByRange.value}px`
 
 const onTargetRange=(event) => followUpText.style.fontSize=`${event.currentTarget.value}px`;
     
 contrByRange.addEventListener('input', onTargetRange);
+
+// ===================DRAFT
+//contrByRange.min=10;
+// contrByRange.max=32;
+// contrByRange.step=4;
+
+// contrByRange.value=16;
+
