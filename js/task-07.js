@@ -9,9 +9,14 @@ console.dir(contrByRange);
 const followUpText=document.querySelector('#text');
 console.dir(followUpText);
 
-function onTargetRange(event) {
-    let fontSize= `${event.currentTarget.value}px`;
-    followUpText.style.fontSize=fontSize;
-    return ;
-}
+contrByRange.min=10;
+contrByRange.max=32;
+contrByRange.step=4;
+
+
+// followUpText.style.fontSize=`${contrByRange.value}px`
+contrByRange.value=16;
+
+const onTargetRange=(event) => followUpText.style.fontSize=`${event.currentTarget.value}px`;
+    
 contrByRange.addEventListener('input', onTargetRange);
