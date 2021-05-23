@@ -1,0 +1,31 @@
+/* task 3 */
+.galeryList {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    list-style-type: none;
+}
+
+.card:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.imgGal{
+    max-width: 250px;
+}
+
+/* task 6 */
+
+#validation-input {
+    border: 3px solid #bdbdbd;
+  }
+  
+  #validation-input.valid {
+    border-color: #4caf50;
+  }
+  
+  #validation-input.invalid {
+    border-color: #f44336;
+  }
